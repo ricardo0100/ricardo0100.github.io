@@ -1,12 +1,28 @@
 ---
 layout: post
 title:  "Introduction to Views and View Controllers"
-date:   2016-02-12
+date:   2016-02-14
 categories:
 description: Basic description about some important UIKit objects (UIView, UIViewController and UINavigationController) and the responsibilities of each one.
 ---
 
 ###Introduction
+
+...
+
+
+###Interface Builder
+
+Everything that you can do with iOS framework can be done using only code, but of course
+
+![Interface Builder](/public/posts/interface-builder.png)
+
+The easiest way to create user interfaces for iOS app is using Interface Builder.
+
+<!-- - Drag and drop views
+- Set some view's properties
+- Manage its sizing and positioning with [autolayout][Autolayout Guide]
+- Create [outlets][Outlet Docs] to link views to the code -->
 
 
 ###UIView
@@ -26,15 +42,6 @@ Every view on the screen is responsible to manage its content. All the view's co
 
 Another important thing about Views is the View's hierarchy. Every instance of `UIView` can act as a container of other instances of `UIView`.
 
-####Interface Builder
-
-The easiest way to create views is in *nib* or *storyboard* files. They can be created using [Xcode Interface Builder][Interface Builder Page] where its possible to:
-
-- Drag and drop views
-- Set some view's properties
-- Manage its sizing and positioning with [autolayout][Autolayout Guide]
-- Create [outlets][Outlet Docs] to link views to the code
-
 ####Managing views
 
 Interface Builder is awesome but eventually its necessary to have access to the views programatically.
@@ -46,6 +53,7 @@ let view = UIView()
 {% endhighlight %}
 
 To create a view and define its size and position use:
+
 {% highlight swift %}
 view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
 view.backgroundColor = UIColor.greenColor()
@@ -53,7 +61,8 @@ view.backgroundColor = UIColor.greenColor()
 <small>*Result:*</small>
 ![](/public/posts/uiview-1.png)
 
-To add subviews to to that view use:
+To add subviews to that view use:
+
 {% highlight swift %}
 let subview = UIView(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
 subview.backgroundColor = UIColor.redColor()
@@ -67,6 +76,7 @@ view.addSubview(label)
 ![](/public/posts/uiview-2.png)
 
 To access the subviews of a view use:
+
 {% highlight swift %}
 let subviews = view.subviews
 //returns an array of UIViews
@@ -79,6 +89,7 @@ let superview = view.superview
 {% endhighlight %}
 
 [UIView Class Reference][UIView Docs] is a great place to learn more details about managing views and its subclasses.
+
 
 ###UIViewController
 
@@ -99,10 +110,6 @@ A view controller is a class that manages a portion of views of your app, usuall
 - *Content view controllers* manage the content views inside a specific view controller
 - *Container view controllers* provide a way to present other view controllers. Some examples: `UINavigationController`, `UITabBarController` and `UISplitViewController`
 
-####Interface Builder
-
-...
-
 ####Managing view controllers
 
 Every view controller is handled by a subclass of `UIViewController`. The role of this class is:
@@ -112,8 +119,9 @@ Every view controller is handled by a subclass of `UIViewController`. The role o
 - Update the views
 - Hanlde presentation of other view controllers
 
-####View controller lifecycle
+####Subclassing UIViewController
 
+[rever]
 During the presentation of a view controller iOS calls some methods that are used to set up and prepare the view controller to show itself to the user.
 
 {% highlight swift %}
@@ -130,10 +138,58 @@ override func viewWillAppear(animated: Bool) {
 
 >There are a lot of methods like this that can be overridden. Use the [UIViewController class reference][UIViewController Docs] to choose the right one for what you need and be careful to avoid performance issues.
 
+
 ###UINavigationController
+
+A navigation controller is a container view controller that shows view controllers under a navigation bar. The navigation controller sets up the navigation bar according to the view that is currently being presented. It's really easy to create a navigation flow using storyboards.
+
+>A navigation controller object manages the currently displayed screens using the navigation stack, which is represented by an array of view controllers. The first view controller in the array is the root view controller. The last view controller in the array is the view controller currently being displayed. <small>[UINavigationController class reference][UINavigationController Docs]</small>
+
+
+The image below is an example of how navigation controller adapts the navigation bar while the user navigates through the iOS Settings App.
+
+![](/public/posts/navigation-controller.png)
+
+
+####Managing the navigation controller
+
+It's possible to set up almost all the navigation flow using Interface Builder, but eventually coding is inevitable.
+
+To access the child view controllers use:
+
+{% highlight swift %}
+let viewControllers = navigationController.viewControllers
+//Returns an array of UIViewController
+{% endhighlight %}
+
+To push a view controller to the top of the navigation stack use:
+
+{% highlight swift %}
+navigationController.pushViewController(viewController, animated: true)
+{% endhighlight %}
+
+To remove the currently visible view controller from the top of the navigation stack use:
+
+{% highlight swift %}
+navigationController.popViewControllerAnimated(true)
+{% endhighlight %}
+
+When the navigation flow is defined using storyboards and segues you might want to prepera the view controller to be shown before it becomes visible. To do that override the `prepareForSegue` method like:
+
+{% highlight swift %}
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    let destinationViewController = segue.destinationViewController
+    //Set up the destinationViewController
+}
+{% endhighlight %}
+
+More about navigation controllers can be found in the [Navigation Controllers Guide][Navigation Controllers Guide].
 
 
 ###Conclusion
+
+...
+
 
 
 [Interface Builder Page]: https://developer.apple.com/xcode/interface-builder/
@@ -142,6 +198,8 @@ override func viewWillAppear(animated: Bool) {
 [Outlet Docs]: https://developer.apple.com/library/ios/documentation/General/Conceptual/Devpedia-CocoaApp/Outlet.html#//apple_ref/doc/uid/TP40009071-CH4
 [UIView Docs]: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/
 [UIViewController Docs]: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/
+[UINavigationController Docs]: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINavigationController_Class/
 [View Programming Guide]: https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503
 [View Controller Programming Guide]: https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/index.html#//apple_ref/doc/uid/TP40007457-CH2-SW1
 [Autolayout Guide]: https://developer.apple.com/library/prerelease/ios/documentation/UserExperience/Conceptual/AutolayoutPG/index.html
+[Navigation Controllers Guide]: https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewControllerCatalog/Chapters/NavigationControllers.html
