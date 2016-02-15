@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Introduction to Views and View Controllers"
-date:   2016-02-14
+date:   2016-02-15
 categories:
 description: Basic description about some important UIKit objects (UIView, UIViewController and UINavigationController) and the responsibilities of each one.
 ---
@@ -15,7 +15,7 @@ description: Basic description about some important UIKit objects (UIView, UIVie
 
 Everything that you can do with iOS framework can be done using only code, but of course
 
-![Interface Builder](/public/posts/interface-builder.png)
+![Interface Builder](/assets/posts/interface-builder.png)
 
 The easiest way to create user interfaces for iOS app is using Interface Builder.
 
@@ -59,7 +59,7 @@ view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
 view.backgroundColor = UIColor.greenColor()
 {% endhighlight %}
 <small>*Result:*</small>
-![](/public/posts/uiview-1.png)
+![](/assets/posts/uiview-1.png)
 
 To add subviews to that view use:
 
@@ -73,7 +73,7 @@ label.text = "Hey"
 view.addSubview(label)
 {% endhighlight %}
 <small>*Result:*</small>
-![](/public/posts/uiview-2.png)
+![](/assets/posts/uiview-2.png)
 
 To access the subviews of a view use:
 
@@ -148,7 +148,7 @@ A navigation controller is a container view controller that shows view controlle
 
 The image below is an example of how navigation controller adapts the navigation bar while the user navigates through the iOS Settings App.
 
-![](/public/posts/navigation-controller.png)
+![](/assets/posts/navigation-controller.png)
 
 
 ####Managing the navigation controller
