@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-![](public/profile.png)
+![Profile picture](public/profile.png)
 
 ###Ricardo Gehrke Filho
 
