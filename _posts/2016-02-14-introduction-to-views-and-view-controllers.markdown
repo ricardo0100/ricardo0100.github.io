@@ -1,24 +1,42 @@
 ---
 layout: post
 title:  "Introduction to Views and View Controllers"
-date:   2016-02-15
+date:   2016-02-19
 categories:
 description: Basic description about some important UIKit objects (UIView, UIViewController and UINavigationController) and the responsibilities of each one.
 ---
 
 ###Introduction
 
-MVC ticaracatica
+When I first opened the iOS project in the company I work to add some features I got a little worried. I had no idea about how iOS development. So I started to study. And this is what this blog is about. Things that I've learned while studying iOS frameworks and I would liked to have read before getting started. I hope it helps! 🙂
 
-...
+This first post is about some basic concepts of **UIKit** components like **views** and **view controllers** which are the basis for every iOS app. All the references are from the [official documentation][Apple Docs].
 
-[Cocoa Touch][Cocoa Touch] is built on the MVC (Model View Controller) pattern, that's why it is so easy to link thing in Interface Builder with code. Basically what you create with the Interface Builder is part of the **View layer** of the MVC. The custom classes that customize the behavior of your views are also part of this layer, so don't forget that this code should be **responsible only for managing views**. Business rules and access to data should be done in another layer. Always remember that you may want to reuse your views!
+####About iOS Technologies
 
-...
+[iOS][iOS Page] is the operating system that runs on iPad, iPod touch and iPhone devices. It manages the hardware and provides technologies that allow us developers to build apps.
+
+At a glance iOS is divided in four layers:
+
+![iOS Layers](/public/posts/ios-layers.png)
+
+- **Cocoa Touch**: contains key frameworks for building iOS. These frameworks define the appearance of your app. They also provide the basic  infrastructure for multitasking, touch-based input, push notifications and other features.
+- **Media**: contains the graphics, audio, and video technologies you use to implement multimedia experiences in your apps
+- **Core Services**: contains fundamental system services for apps like iCloud, Networking, Database, and Files.
+- **Core OS**: contains the low-level features that most other technologies are built upon.
+
+**UIKit** is part of the [Cocoa Touch][Cocoa Touch] layer. It is the iOS Graphic User Interface framework. This post introduces three of the most basic UIKit concepts and their interaction with Interface Builder.
+
+- UIView
+- UIViewController
+- UINavigationController
+
+["About the iOS Technologies"][About the iOS Technologies] is a great document where you can find more information about the technologies iOS provides.
+
 
 ###Interface Builder
 
-![Interface Builder](/assets/posts/interface-builder.png)
+![Interface Builder](/public/posts/interface-builder.png)
 
 ####Interface Builder vs Code
 
@@ -33,7 +51,9 @@ Interface Builder (IB) allows developers to visually create graphic interfaces f
 - Create screen flows using [segues][Segues Guide]
 - Adapt the layout to different screens and orientations with [size classes][Size Classes Guide]
 
-There is a WWDC video about [Implementing UI Designs in Interface Builder][Interface Builder WWDC] that shows a lot of the Interface Builder superpowers.
+If you still need to do adjust anything that IB can't do you can finish the job using some code.
+
+There is a WWDC video about [Implementing UI Designs in Interface Builder][Interface Builder WWDC] that shows a lot of the Interface Builder superpowers💫.
 
 ###UIView
 
@@ -41,15 +61,7 @@ There is a WWDC video about [Implementing UI Designs in Interface Builder][Inter
 
 Views are the main way of an app to interact with users. Everything you see on an app's screen is a view. Usually there are a lot of views interacting between themselves and with the user. `UILabel`, `UITextField` and `UIImageView` are some examples of views that UIKit provides. The Interface Builder have a pane in the bottom right corner of the screen called Object Library where you can find a set of views that you can drag and drop to the screen.
 
-![Object Library](/assets/posts/object-library.png)
-
-####Frames
-
-Every view on the screen is responsible to manage its visual content. All the view's content is inside a rectangular area called frame. Let's use the `UIImageView` in the picture below as an example.
-
-![Frames](/assets/posts/frames.png)
-
-It has a position related to its superview (x and y) and a size (width and height) to define the area it uses. This area is represented by an instance of `CGRect` class. All the views have this property so iOS knows where to put thing when running your app. But don't worry, remembre you don't need to set the views, Auto Layout can make all the job.
+![Object Library](/public/posts/object-library.png)
 
 ####Responsibilities of the Views:
 
@@ -57,34 +69,24 @@ It has a position related to its superview (x and y) and a size (width and heigh
 - Detect user interaction
 - Draw and animate content on the screen
 
-Another important thing about Views is the View's hierarchy. Every instance of `UIView` can act as a container of other instances of `UIView`. It looks something like a tree data structure.
+####Frames
 
-![Views Tree](/assets/posts/views-tree.jpg)
+Every view on the screen is responsible to manage its own visual content. All the view's content is shown inside a rectangular area called frame. Let's use the `UIImageView` in the picture below as an example:
 
-####Customizing Views
+![Frames](/public/posts/frames.png)
 
-To customize a view you just need to subclass any `UIView`, that includes `UILabel`, `UIImageView`, `UIButton` and many others. A good example of view customization is when we want to use prototype cells for table views. You just need to design your view like:
+Frames have a position related to its superview (x and y) and a size (width and height) to define the area it uses. This area is represented by an instance of `CGRect` class called `frame`. Every view on screen have this property, that's how iOS knows where to put your views when running your app. Don't worry about setting frames up. [Auto Layout][Auto Layout Guide] calculates everything for you considering screen sizes and orientation differences.
 
-![Wheather Cell](/assets/posts/wheather-cell.png)
-
-####Managing Views Programmatically
-
-To create a view simply use:
-
-{% highlight swift %}
-let view = UIView()
-{% endhighlight %}
-
-To create a view and define its frame (size and position) use:
+To create a view and set its frame use:
 
 {% highlight swift %}
 view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
 view.backgroundColor = UIColor.greenColor()
 {% endhighlight %}
 <small>*Result:*</small>
-![](/assets/posts/uiview-1.png)
+![](/public/posts/uiview-1.png)
 
-To add subviews to that view use:
+To add subviews to this view use:
 
 {% highlight swift %}
 let subview = UIView(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
@@ -96,7 +98,13 @@ label.text = "Hey"
 view.addSubview(label)
 {% endhighlight %}
 <small>*Result:*</small>
-![](/assets/posts/uiview-2.png)
+![](/public/posts/uiview-2.png)
+
+####View's hierarchy
+
+Every instance of `UIView` can act as a container of other instances of `UIView`. It looks something like a tree data structure.
+
+![Views Tree](/public/posts/views-tree.jpg)
 
 To access the subviews of a view use:
 
@@ -109,6 +117,22 @@ To access the superview of a view use:
 {% highlight swift %}
 let superview = view.superview
 //returns an instance of UIView or nil
+{% endhighlight %}
+
+####Customizing Views
+
+To customize a view you just need to subclass any `UIView`. A good example of view customization is when we want to use prototype cells for table views. Imagine a table view cell in the Interface Builder like the one highlighted in green:
+
+![Wheather Cell](/public/posts/wheather-cell.png)
+
+To link the cell with the managing class for it use the Identity Inspector in the right pane of Interface Builder and choose a subclass of `UITableViewCell`.
+
+![Identity Inspector](/public/posts/cell-identity-inspector.png)
+
+`WeatherForDateTableViewCell` is the class created to manage the views that you dragged onto the cell prototype.
+
+{% highlight swift %}
+
 {% endhighlight %}
 
 If you want to learn more about what `UIView` class can do use the [UIView Class Reference][UIView Docs]. I also recommend the [View Programming Guide for iOS][View Programming Guide] to learn more details about managing views.
@@ -181,7 +205,7 @@ A navigation controller is a container view controller that shows its child view
 
 >A navigation controller object manages the currently displayed screens using the navigation stack, which is represented by an array of view controllers. The first view controller in the array is the root view controller. The last view controller in the array is the view controller currently being displayed. <small>[UINavigationController class reference][UINavigationController Docs]</small>
 
-![IB Navigation Controller](/assets/posts/ib-navigation-controller.png)
+![IB Navigation Controller](/public/posts/ib-navigation-controller.png)
 
 
 [Explicar imagem]
@@ -227,6 +251,8 @@ More about navigation controllers can be found in the [Navigation Controllers Gu
 
 
 
+
+[iOS Page]: http://www.apple.com/ios/
 [Interface Builder WWDC]: https://developer.apple.com/videos/play/wwdc2015-407/
 [Interface Builder Guide]: https://developer.apple.com/library/ios/recipes/xcode_help-interface_builder/_index.html
 [Apple Docs]: https://developer.apple.com/library/ios/navigation/
@@ -244,3 +270,4 @@ More about navigation controllers can be found in the [Navigation Controllers Gu
 [Cocoa Touch]: https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/iPhoneOSTechnologies/iPhoneOSTechnologies.html
 [UINavigationItem Docs]: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINavigationItem_Class/
 [MVC]: https://developer.apple.com/library/mac/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html
+[About the iOS Technologies]: https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898-CH1-SW1
