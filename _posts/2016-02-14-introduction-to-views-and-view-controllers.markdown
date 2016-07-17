@@ -6,13 +6,13 @@ categories:
 description: Basic description about some important UIKit objects (UIView, UIViewController and UINavigationController) and the responsibilities of each one.
 ---
 
-###Introduction
+### Introduction
 
 When I first opened the iOS project in the company I work to add some features I got a little worried. I had no idea about how iOS development. So I started to study. And this is what this blog is about. Things that I've learned while studying iOS frameworks and I would liked to have read before getting started. I hope it helps! 🙂
 
 This first post is about some basic concepts of **UIKit** components like **views** and **view controllers** which are the basis for every iOS app. All the references are from the [official documentation][Apple Docs].
 
-####About iOS Technologies
+#### About iOS Technologies
 
 [iOS][iOS Page] is the operating system that runs on iPad, iPod touch and iPhone devices. It manages the hardware and provides technologies that allow us developers to build apps.
 
@@ -34,15 +34,15 @@ At a glance iOS is divided in four layers:
 ["About the iOS Technologies"][About the iOS Technologies] is a great document where you can find more information about the technologies iOS provides.
 
 
-###Interface Builder
+### Interface Builder
 
 ![Interface Builder](/public/posts/interface-builder.png)
 
-####Interface Builder vs Code
+#### Interface Builder vs Code
 
 Interface Builder (IB) allows developers to visually create graphic interfaces for iOS. It makes the development process of an app much faster and provides a great way to design screens and custom views. Some people prefer to make everything using only code, but I believe that you can take the most advantages of Interface Builder and still keep the possibility to make code customizations if you learn how things work.
 
-####With Interface Builder it is possible to:
+#### With Interface Builder it is possible to:
 
 - Drag and drop views to the screen
 - Set view's properties
@@ -55,7 +55,7 @@ If you still need to do adjust anything that IB can't do you can finish the job 
 
 There is a WWDC video about [Implementing UI Designs in Interface Builder][Interface Builder WWDC] that shows a lot of the Interface Builder superpowers💫.
 
-###UIView
+### UIView
 
 >A view is an instance of the `UIView` class and manages a rectangular area in your application window. Views are responsible for drawing content, handling multitouch events, and managing the layout of any subviews. <small>[View Programming Guide][View Programming Guide]</small>
 
@@ -63,13 +63,13 @@ Views are the main way of an app to interact with users. Everything you see on a
 
 ![Object Library](/public/posts/object-library.png)
 
-####Responsibilities of the Views:
+#### Responsibilities of the Views:
 
 - Manage its layout and its subviews layouts
 - Detect user interaction
 - Draw and animate content on the screen
 
-####Frames
+#### Frames
 
 Every view on the screen is responsible to manage its own visual content. All the view's content is shown inside a rectangular area called frame. Let's use the `UIImageView` in the picture below as an example:
 
@@ -100,7 +100,7 @@ view.addSubview(label)
 <small>*Result:*</small>
 ![](/public/posts/uiview-2.png)
 
-####View's hierarchy
+#### View's hierarchy
 
 Every instance of `UIView` can act as a container of other instances of `UIView`. It looks something like a tree data structure.
 
@@ -119,7 +119,7 @@ let superview = view.superview
 //returns an instance of UIView or nil
 {% endhighlight %}
 
-####Customizing Views
+#### Customizing Views
 
 To customize a view you just need to subclass any `UIView`. A good example of view customization is when we want to use prototype cells for table views. Imagine a table view cell in the Interface Builder like the one highlighted in green:
 
@@ -138,13 +138,13 @@ To link the cell with the managing class for it use the Identity Inspector in th
 If you want to learn more about what `UIView` class can do use the [UIView Class Reference][UIView Docs]. I also recommend the [View Programming Guide for iOS][View Programming Guide] to learn more details about managing views.
 
 
-###UIViewController
+### UIViewController
 
 A view controller is a class that manages a portion of views of your app, usually a whole screen. For example, in a weather app a list of cities could be a view controller and when a city is selected the weather details for that city appears in another view controller.
 
 >The `UIViewController` class defines the methods and properties for managing your views, handling events, transitioning from one view controller to another, and coordinating with other parts of your app. <small>[View Controller Programming Guide][View Controller Programming Guide]</small>
 
-####Responsibilities of the view controllers:
+#### Responsibilities of the view controllers:
 
 - Set up views
 - Update views content
@@ -152,12 +152,12 @@ A view controller is a class that manages a portion of views of your app, usuall
 - Handle user events
 - Manage transitioning between view controllers
 
-####Types of view controllers:
+#### Types of view controllers:
 
 - *Content view controllers* manage the content views inside a specific view controller
 - *Container view controllers* provide a way to present other view controllers. Some examples: `UINavigationController`, `UITabBarController` and `UISplitViewController`
 
-####Managing view controllers
+#### Managing view controllers
 
 Every view controller is handled by a subclass of `UIViewController`. The role of this class is:
 
@@ -167,7 +167,7 @@ Every view controller is handled by a subclass of `UIViewController`. The role o
 - Update views
 - Handle presentation of other view controllers
 
-####Subclassing UIViewController
+#### Subclassing UIViewController
 
 Every view controller in an iOS app is managed by an instance of `UIViewController` or a subclass. You can create everything programmatically using something like:
 
@@ -199,7 +199,7 @@ class UserLoginViewController: UIViewController {
 {% endhighlight %}
 
 
-###UINavigationController
+### UINavigationController
 
 A navigation controller is a container view controller that shows its child view controllers under a navigation bar. The navigation controller sets up the navigation bar according to the view controller that is currently being presented. Every view controller has a property called `navigationItem` of the type `UINavigationItem`. This is the object that navigation controller uses to know what to show in the navigation bar (e.g. Title). See the [UINavigationItem class reference][UINavigationItem Docs] to
 
@@ -210,7 +210,7 @@ A navigation controller is a container view controller that shows its child view
 
 [Explicar imagem]
 
-####Managing the navigation controller
+#### Managing the navigation controller
 
 It's possible to set up almost all the navigation flow using Interface Builder, but eventually coding is inevitable.
 
@@ -245,7 +245,7 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 More about navigation controllers can be found in the [Navigation Controllers Guide][Navigation Controllers Guide].
 
 
-###Conclusion
+### Conclusion
 
 ...
 

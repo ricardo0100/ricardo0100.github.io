@@ -3,11 +3,7 @@ layout: page
 title: About me
 ---
 
-<<<<<<< HEAD
 ![Profile picture](public/profile.png)
-=======
-![Me](public/profile.png)
->>>>>>> master
 
 ### Ricardo Gehrke Filho
 
