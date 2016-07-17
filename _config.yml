@@ -1,10 +1,8 @@
-# Dependencies
+title:            Ricardo Gehrke Filho
+tagline:          ''
+description:      'Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá.'
+url:              ricardofilho.com.br
+baseurl:          /
+
 markdown:         kramdown
 highlighter:      rouge
-
-# Setup
-title:            iOS Dev Blog
-tagline:          ''
-description:      ''
-url:              ricardo0100.github.io
-baseurl:          /

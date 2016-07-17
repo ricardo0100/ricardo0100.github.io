@@ -3,12 +3,12 @@ layout: page
 title: About me
 ---
 
-![](public/profile.png)
+![Me](public/profile.png)
 
-###Ricardo Gehrke Filho
+### Ricardo Gehrke Filho
 
-iOS developer at [Meus Pedidos](https://www.meuspedidos.com.br)
+Developer
 
-{% include github-logo.svg %}[ricardo0100](https://github.com/ricardo0100)
+[{% include github-logo.svg %}ricardo0100](https://github.com/ricardo0100)
 
 Still thinking 🤔
